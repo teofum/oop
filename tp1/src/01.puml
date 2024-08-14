@@ -1,0 +1,7 @@
+@startuml
+class Gear {
+    int chainring
+    double cog
+    ratio()
+}
+@enduml

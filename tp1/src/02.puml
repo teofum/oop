@@ -1,0 +1,13 @@
+@startuml
+
+class ComplexNumber {
+double r
+double i
+ComplexNumber(double r, double i)
+ComplexNumber(double r)
+double re()
+double im()
+add(ComplexNumber rhs)
+}
+
+@enduml
