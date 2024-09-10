@@ -1,7 +1,7 @@
-package E09;
+package E03_04;
 
 public class Ellipse extends Shape {
-    protected final Point center;
+    protected Point center;
     protected final double a, b;
 
     public Ellipse(Point center, double dx, double dy) {
@@ -26,5 +26,25 @@ public class Ellipse extends Shape {
     @Override
     public String toString() {
         return "Ellipse [ Center: %s, Dmaj: %.2f, Dmin: %.2f ]".formatted(center.toString(), a * 2, b * 2);
+    }
+
+    @Override
+    public void moveNorth(double delta) {
+        this.center = this.center.add(new Point(0, delta));
+    }
+
+    @Override
+    public void moveSouth(double delta) {
+        this.center = this.center.add(new Point(0, -delta));
+    }
+
+    @Override
+    public void moveEast(double delta) {
+        this.center = this.center.add(new Point(delta, 0));
+    }
+
+    @Override
+    public void moveWest(double delta) {
+        this.center = this.center.add(new Point(-delta, 0));
     }
 }
