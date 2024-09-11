@@ -3,6 +3,32 @@ package E03;
 public class LinkedList<T> implements LinearList<T> {
     private Node<T> head, last;
 
+    private static class Node<T> {
+        private T elem;
+        private Node<T> next;
+
+        public Node(T elem) {
+            this.elem = elem;
+            this.next = null;
+        }
+
+        public T get() {
+            return elem;
+        }
+
+        public void set(T elem) {
+            this.elem = elem;
+        }
+
+        public Node<T> getNext() {
+            return next;
+        }
+
+        public void setNext(Node<T> next) {
+            this.next = next;
+        }
+    }
+
     public LinkedList() {
         this.head = null;
         this.last = null;
