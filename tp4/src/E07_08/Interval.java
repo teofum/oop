@@ -1,5 +1,7 @@
 package E07_08;
 
+import java.util.Objects;
+
 public class Interval {
     private final double start, end, increment;
     private static final double EPSILON = 1e-8;
@@ -29,7 +31,7 @@ public class Interval {
     public long indexOf(double x) {
         double y = (x - start) / increment;
         long index = Math.round(y);
-        return (Math.abs(index - y) > EPSILON) ? 0 : index + 1;
+        return (index - y < EPSILON) ? index + 1 : 0;
     }
 
     public boolean includes(double x) {
@@ -38,7 +40,9 @@ public class Interval {
 
     public long count(IntervalCondition condition) {
         long count = 0;
-        for (double x = start; x <= end; x += increment)
+        double min = Math.min(start, end), max = Math.max(start, end), i = start <= end ? increment : -increment;
+
+        for (double x = min; x <= max; x += i)
             if (condition.test(x)) count++;
 
         return count;
@@ -52,11 +56,13 @@ public class Interval {
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Interval other)) return false;
-        return other.start == start && other.end == end && other.increment == increment;
+        return Double.compare(other.start, start) == 0 &&
+                Double.compare(other.end, end) == 0 &&
+                Double.compare(other.increment, increment) == 0;
     }
 
     @Override
     public int hashCode() {
-        return 1; // TODO
+        return Objects.hash(start, end, increment);
     }
 }
