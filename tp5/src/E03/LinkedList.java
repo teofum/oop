@@ -11,7 +11,11 @@ public class LinkedList<T> implements LinearList<T> {
     @Override
     public void add(T elem) {
         Node<T> newNode = new Node<>(elem);
-        this.last.setNext(newNode);
+        if (this.last != null) {
+            this.last.setNext(newNode);
+        } else {
+            this.head = newNode;
+        }
         this.last = newNode;
     }
 
@@ -35,6 +39,9 @@ public class LinkedList<T> implements LinearList<T> {
             i--;
         }
         if (node == null) throw new IndexOutOfBoundsException();
+
+        if (node == this.last)
+            this.last = last;
 
         if (last == null) {
             this.head = node.getNext();
@@ -67,6 +74,20 @@ public class LinkedList<T> implements LinearList<T> {
             i++;
         }
         return i;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        Node<T> node = this.head;
+        while (node != null) {
+            sb.append(node.get().toString());
+            node = node.getNext();
+            if (node != null) sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
     private Node<T> find(int i) {
